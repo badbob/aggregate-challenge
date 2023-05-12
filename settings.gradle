@@ -1,0 +1,6 @@
+rootProject.name = 'review-challenge'
+include 'review-model'
+include 'review-service'
+include 'review-client'
+
+include 'aggregate-service'
