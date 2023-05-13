@@ -9,6 +9,10 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.7.22'
 }
 
+bootJar {
+   archiveName = 'review-service.jar'
+}
+
 group = 'com.vladimir.loshchin.review'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
@@ -21,6 +25,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
 
     runtimeOnly 'com.h2database:h2'
@@ -28,6 +33,7 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.security:spring-security-test'
 
     implementation project(':review-model')
 }
