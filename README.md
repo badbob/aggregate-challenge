@@ -67,7 +67,7 @@ requests. So I decided that bypassing the WAS is out of the scope of this task.
 
 ### How to run locally
 
-    $ java -jar aggregate-service/build/libs/aggregate-service.jar -Dreview.host=localhost
+    $ java -jar aggregate-service/build/libs/aggregate-service.jar --review.host=localhost
 
 
 ### Request examples
