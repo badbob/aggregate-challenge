@@ -6,6 +6,14 @@ User can POST 1 to 5 scope for the product.
 Service implemented in Kotlin which I'm have no experience with.
 Just as demonstraction that I can dive in quickly into new JVM language.
 
+### How to build
+
+    $ ./gradlew :review-service:bootJar
+
+### How to run locally
+
+    $ java -jar review-service/build/libs/review-service.jar
+
 ### Request examples
 
 #### Post the 5 score to product with ID = 1:
@@ -28,6 +36,16 @@ Request:
 
     $ curl localhost:8081/rating/1
 
+Response:
+
+```json
+{
+  "productId": 1,
+  "rating": 3.6666667,
+  "total": 3
+}
+```
+
 ## review-model
 
 Contains the shared (by *review-client* and *review-service*) model classes.
@@ -42,6 +60,15 @@ Contains microservice aggregating results from external API and _review-service_
 As an external API I used [Dummy Rest API](https://dummy.restapiexample.com/) instead
 of Adidas, because Adidas introduced some kind of WAF which is blocking some of the
 requests. So I decided that bypassing the WAS is out of the scope of this task.
+
+### How to build
+
+    $ ./gradlew :aggregate-service:bootJar
+
+### How to run locally
+
+    $ java -jar aggregate-service/build/libs/aggregate-service.jar -Dreview.host=localhost
+
 
 ### Request examples
 #### Getting the aggregate:
@@ -108,11 +135,6 @@ $ curl -s localhost:8080/aggregate/1000 | jq .
 
 *404* status returned.
 
-
-# How to run on local machine
-
-    $ ./gradlew :aggregate-service:bootRun -Dreview.host=localhost
-    $ ./gradlew :review-service:bootRun
 
 # How to run in Docker
 ## How to build [Review] service Docker image

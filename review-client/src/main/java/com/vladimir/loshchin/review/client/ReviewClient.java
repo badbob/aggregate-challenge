@@ -36,7 +36,7 @@ public class ReviewClient {
         webClient = WebClient.builder().clientConnector(connector).build();
     }
     
-    public Mono<Rating> getRating(String productId) {
+    public Mono<Rating> getRating(Long productId) {
         return webClient.get()
                 .uri("http://{reviewHost}:8081/rating/{productId}", reviewHost, productId)
                 .accept(MediaType.APPLICATION_JSON)

@@ -37,7 +37,7 @@ public class ProductRepository {
         webClient = WebClient.builder().clientConnector(connector).build();
     }
 
-    public Mono<Product> get(String productId) {
+    public Mono<Product> get(Long productId) {
 
         return webClient.get()
             .uri(URL, productId)

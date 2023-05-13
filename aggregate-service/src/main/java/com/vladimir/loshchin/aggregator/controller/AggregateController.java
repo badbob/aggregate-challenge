@@ -31,7 +31,7 @@ public class AggregateController {
     private ReviewClient reviewClient;
 
     @GetMapping("/{id}")
-    public Aggregate getProduct(@PathVariable("id") String id) {
+    public Aggregate getProduct(@PathVariable("id") Long id) {
 
         // Ignoring if there is no rating found by ID
         Mono<Optional<Rating>> rating = reviewClient.getRating(id)
