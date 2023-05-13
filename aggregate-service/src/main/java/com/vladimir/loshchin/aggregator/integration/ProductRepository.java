@@ -28,7 +28,7 @@ public class ProductRepository {
 
         HttpClient httpClient = HttpClient.newBuilder()
             .followRedirects(Redirect.NORMAL)
-            .connectTimeout(Duration.ofSeconds(20))
+            .connectTimeout(Duration.ofSeconds(1))
             .build();
 
         ClientHttpConnector connector =
