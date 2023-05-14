@@ -18,13 +18,13 @@ import org.springframework.http.MediaType;
 // import static org.springframework.web.client.reactive.support.RxJava1ClientWebRequestBuilder.*;
 
 @Component
-public class ProductRepository {
+public class ProductClient {
 
     private String URL = "https://dummyjson.com/products/{productId}";
 
     private WebClient webClient;
 
-    public ProductRepository() {
+    public ProductClient() {
 
         HttpClient httpClient = HttpClient.newBuilder()
             .followRedirects(Redirect.NORMAL)

@@ -23,5 +23,6 @@ resp = requests.post('http://localhost:8081/rating/1/5')
 assert resp.status_code == 401, "Unauthorized requests prohibited"
 
 resp = requests.post('http://localhost:8081/rating/1/5', auth=basic)
+resp.raise_for_status()
 
 print("All tests passed successfully")

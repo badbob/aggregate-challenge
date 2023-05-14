@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.vladimir.loshchin.aggregator.integration.ProductRepository;
+import com.vladimir.loshchin.aggregator.integration.ProductClient;
 import com.vladimir.loshchin.aggregator.integration.dto.DummyJsonError;
 import com.vladimir.loshchin.aggregator.integration.dto.Product;
 import com.vladimir.loshchin.aggregator.model.Aggregate;
@@ -30,7 +30,7 @@ import reactor.core.publisher.Mono;
 public class AggregateControllerTest {
 
     @MockBean
-    ProductRepository productRepo;
+    ProductClient productRepo;
     
     @MockBean
     ReviewClient reviewClient;

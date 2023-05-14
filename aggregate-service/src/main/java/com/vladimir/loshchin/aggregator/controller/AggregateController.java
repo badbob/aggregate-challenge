@@ -1,6 +1,7 @@
 package com.vladimir.loshchin.aggregator.controller;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.time.Duration;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import org.springframework.web.server.ServerErrorException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vladimir.loshchin.aggregator.integration.ProductRepository;
+import com.vladimir.loshchin.aggregator.integration.ProductClient;
 import com.vladimir.loshchin.aggregator.integration.dto.DummyJsonError;
 import com.vladimir.loshchin.aggregator.integration.dto.Product;
 import com.vladimir.loshchin.aggregator.model.Aggregate;
@@ -30,7 +31,7 @@ import reactor.util.retry.Retry;
 public class AggregateController {
 
     @Autowired
-    private ProductRepository productClient;
+    private ProductClient productClient;
     
     @Autowired
     private ReviewClient reviewClient;
@@ -51,12 +52,20 @@ public class AggregateController {
                 .retryWhen(Retry.fixedDelay(3, Duration.ofMillis(300))
                         .filter(ex -> {
                     if (ex instanceof WebClientResponseException) {
-                        return ((WebClientResponseException) ex)
-                                .getStatusCode().is5xxServerError();
+
+                        var wcre = (WebClientResponseException) ex;
+
+                        if (wcre.getCause() instanceof ConnectException) {
+                            return true;
+                        }
+
+                        return wcre.getStatusCode().is5xxServerError();
                     }
-                    if (ex instanceof IOException) {
+
+                    if (ex instanceof ConnectException) {
                         return true;
                     }
+
                     return false;
                 }))
                 .onErrorMap(
